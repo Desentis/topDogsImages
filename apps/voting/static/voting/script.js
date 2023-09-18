@@ -11,6 +11,12 @@ window.onload = () => {
                     "Content-type": "application/json; charset=UTF-8"
                 }
             })
+            wrapper = event.target.parentElement
+            wrapper.classList.add("voted")
+            votes = wrapper.getElementsByClassName("votes")[0]
+            votes.innerHTML = parseInt(votes.innerHTML) + 1
+
+            location.reload()
         }
     })
 }
