@@ -19,6 +19,12 @@ def index(request):
         return render(request, 'voting/index.html')
 
 
+def best(request):
+    most_voted = Voted.objects.order_by("votes")[:3]
+    context = {'most_voted_dogs': most_voted}
+    return render(request, 'voting/best.html', context)
+
+
 def get_voting_images():
 
     api_url = 'https://dog.ceo/api/breeds/image/random'
