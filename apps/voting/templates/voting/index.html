@@ -1,0 +1,31 @@
+{% load static %}
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>Vote for the best dog</title>
+    <link rel="stylesheet" href="{% static 'voting/style.css' %}">
+    <script src="{% static 'voting/script.js' %}"></script>
+  </head>
+  <body>
+    {% if dogs %}
+      <div class="title-wrapper">
+        <span class="title text">Choose the image you like best</span>
+     </div>
+      <div class="images">
+        {% for dog in dogs %}
+          <div class="image-wrapper">
+            <img src="{{ dog.link }}" alt="image" class="image">
+            <div class="votes-wrapper">
+              <span class="votes text">{{ dog.votes }}</span>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="title-wrapper">
+        <span class="title text">Images are not available</span>
+     </div>
+    {% endif %}
+  </body>
+</html>
