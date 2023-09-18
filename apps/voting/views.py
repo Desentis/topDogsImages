@@ -29,22 +29,30 @@ def get_voting_images():
 
     api_url = 'https://dog.ceo/api/breeds/image/random'
     number_of_images = 2
+    number_of_attempts = 10
 
     image_urls = []
-    for i in range(number_of_images):
+    while len(image_urls) < number_of_images and number_of_attempts > 0:
+        number_of_attempts -= 1
+
         try:
             r = get(api_url)
             r.raise_for_status()
-
         except HTTPError as err:
-            raise err
-            # API error
-            pass
+            continue
 
-        else:
-            url = loads(r.text).get('message')
-            if url:
-                image_urls.append(url)
+        image_url = loads(r.text).get('message')
+
+        if not image_url:
+            continue
+
+        try:
+            r = get(image_url)
+            r.raise_for_status()
+        except HTTPError as err:
+            continue
+
+        image_urls.append(image_url)
 
     voting = []
     for url in image_urls:
