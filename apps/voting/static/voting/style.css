@@ -12,6 +12,11 @@ text {
     color: black;
 }
 
+.navbar-default {
+    background-color: #ffe0b6;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .2);
+}
+
 .title-wrapper {
     width: fit-content;
     margin: auto;
